@@ -13,8 +13,8 @@ def import_the_big_packages():
 @app.route("/",methods= ['POST', 'GET'])
 def home():
 
-	# Default 10, maximum 100
-	num_coords_input = min(request.args.get('num_coords', default = 10, type = int),100)
+	# Default 10, maximum 100, minimum 1
+	num_coords_input = max(min(request.args.get('num_coords', default = 10, type = int),100),1)
 
 	answer, clues_diff = w3w(num_coords_to_plot=num_coords_input) # add this back on when html code is done.....      , map_html
 	session['answer'] = answer

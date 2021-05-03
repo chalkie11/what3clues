@@ -16,7 +16,7 @@ import pycountry # to get country name from 2-alpha code
 from countryinfo import CountryInfo # to get info from the country name
 import pandas as pd
 from PyDictionary import PyDictionary
-import branca
+# import branca
 
 def w3w(num_coords_to_plot=10, show_status=True):
 	global answer_words

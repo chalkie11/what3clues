@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>What 3 Clues</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}">
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+      <script type=text/javascript>
+		$(document).ready(function() {
+		     $('form').on('submit', function(event) {
+		       $.ajax({
+		          data : {
+		             user_input: $('#user_input').val(),
+		                 },
+		             type : 'POST',
+		             url : '/process'
+		            })
+		        .done(function(data) {
+		          $('#output').text(data.output).show();
+		          $('#newgame_button').html(data.newgame_button).show();
+		      });
+		      event.preventDefault();
+		      });
+		});
+
+		function toggle_display1(){
+		  el = document.querySelector('.content_section1');
+		  
+		  if(el.style.visibility == 'hidden'){
+		      el.style.visibility = 'visible'
+		  }else{
+		     el.style.visibility = 'hidden'
+		  }
+		}
+		function toggle_display2(){
+		  el = document.querySelector('.content_section2');
+		  
+		  if(el.style.visibility == 'hidden'){
+		      el.style.visibility = 'visible'
+		  }else{
+		     el.style.visibility = 'hidden'
+		  }
+		}
+		function toggle_display3(){
+		  el = document.querySelector('.content_section3');
+		  
+		  if(el.style.visibility == 'hidden'){
+		      el.style.visibility = 'visible'
+		  }else{
+		     el.style.visibility = 'hidden'
+		  }
+		}
+	</script>
+
+
+
+	<script type="text/javascript">
+	  function resizeIframe(obj){
+	     obj.style.height = 0;
+	     obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+	  }
+	</script>
+
+   </head>
+   <body>
+    <h1>What 3 Clues</h1>
+
+
+
+
+    <!-- <p>Here is the answer: {{ answer }}</p> -->
+	<!-- <p>Clue 1... {{ clue2_name }}: {{ clue2_val }}</p>
+	<p>Clue 2... {{ clue1_name }}: {{ clue1_val }}</p>
+	<p>Clue 3... {{ clue0_name }}: {{ clue0_val }}</p> -->
+
+	<div display:inline>
+	<button onclick="toggle_display1()">View clue 1</button>
+	<div class="content_section1" style="visibility: hidden;"><p>Clue 1... {{ clue2_name }}: {{ clue2_val }}</p></div>
+	</div>
+
+	<div display:inline>
+	<button onclick="toggle_display2()">View clue 2</button>
+	<div class="content_section2" style="visibility: hidden;"><p>Clue 2... {{ clue1_name }}: {{ clue1_val }}</p></div>
+	</div>
+
+	<div display:inline>
+	<button onclick="toggle_display3()">View clue 3</button>
+	<div class="content_section3" style="visibility: hidden;"><p>Clue 3... {{ clue0_name }}: {{ clue0_val }}</p></div>
+	</div>	
+
+
+	<form class="form-inline">
+	<!--First Name-->
+	<!-- <div class="form-group">
+	<label class="sr-only" for="firstName">First Name</label>
+	<input type="text" class="form-control" id="firstName" placeholder="First Name">
+	</div> -->
+	<!--Last Name-->
+	<div class="form-group">
+	<label class="sr-only" for="user_input">Your answer:</label>
+	<input type="text" class="form-control" id="user_input" placeholder="Enter your answer">
+	</div>
+
+	<!--Submit Button-->
+	<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+	</br>
+	<div id="output"></div>
+	<div id="newgame_button"></div>
+	</br>
+
+   </body>
+
+</html>
+
+
+
+{% extends 'map.html' %}
+
+
+
+
